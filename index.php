@@ -37,13 +37,13 @@
 	            </div>
 	            <div class="form-group d-md-flex">
 	            	<div class="w-50">
-		            	<label class="checkbox-wrap checkbox-primary">Remember Me
+		            	<label class="checkbox-wrap checkbox-primary">Recordarme
 									  <input type="checkbox" checked>
 									  <span class="checkmark"></span>
 									</label>
 								</div>
 								<div class="w-50 text-md-right">
-									<a href="#" style="color: #fff"> <strong> Registrate </strong></a>
+									<a href="./vistas/registro.php" style="color: #fff"> <strong> Registrate </strong></a>
 								</div>
 	            </div>
 	          </form>
