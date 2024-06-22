@@ -58,7 +58,7 @@
               </div>
               <div class="form-group d-md-flex">
                 <div class="w-50 text-md-mid">
-                  <a href="../index.php" style="color: #fff"><strong>Volver al Ingreso</strong></a>
+                  <a href="index.php" style="color: #fff"><strong>Volver al Ingreso</strong></a>
                 </div>
               </div>
             </form>
