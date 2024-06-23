@@ -17,7 +17,7 @@ $id_usuario = $_SESSION['id_usuario'];
 // Consulta SQL para obtener todos los datos del usuario
 $query = "SELECT u.id, u.nombres, u.apellido_paterno, u.apellido_materno, u.fecha_nacimiento, 
                  u.carnet_militar, c.nombre as cargo, d.nombre as departamento, 
-                 u.usuario, u.contrasena, u.CI, e.nombre as extension
+                 u.usuario, u.contrasena, u.CI, e.abreviatura as extension
           FROM usuarios u
           LEFT JOIN cargo c ON u.id_cargo = c.id
           LEFT JOIN departamento d ON u.id_departamento = d.id
@@ -212,21 +212,29 @@ mysqli_close($conexion);
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style="border-radius:70%">
                                 <h5 class="card-title">Perfil de Usuario</h5>
-                                
-            <p><strong>Nombres:</strong> <?php echo $usuario['nombres']; ?></p>
-            <p><strong>Apellido Paterno:</strong> <?php echo $usuario['apellido_paterno']; ?></p>
-            <p><strong>Apellido Materno:</strong> <?php echo $usuario['apellido_materno']; ?></p>
-            <p><strong>Fecha de Nacimiento:</strong> <?php echo $usuario['fecha_nacimiento']; ?></p>
-            <p><strong>Carnet Militar:</strong> <?php echo $usuario['carnet_militar']; ?></p>
-            <p><strong>Cargo:</strong> <?php echo $usuario['cargo']; ?></p>
-            <p><strong>Departamento:</strong> <?php echo $usuario['departamento']; ?></p>
-            <p><strong>Usuario:</strong> <?php echo $usuario['usuario']; ?></p>
-            <p><strong>Contraseña:</strong> <?php echo $usuario['contrasena']; ?></p>
-            <p><strong>CI:</strong> <?php echo $usuario['CI']; ?></p>
-            <p><strong>Extensión:</strong> <?php echo $usuario['extension']; ?></p>
-                            </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Nombres:</strong> <?php echo $usuario['nombres']; ?></p>
+                                        <p><strong>Apellido Paterno:</strong> <?php echo $usuario['apellido_paterno']; ?></p>
+                                        <p><strong>Apellido Materno:</strong> <?php echo $usuario['apellido_materno']; ?></p>
+                                        <p><strong>Fecha de Nacimiento:</strong> <?php echo $usuario['fecha_nacimiento']; ?></p>
+                                        <p><strong>Carnet Militar:</strong> <?php echo $usuario['carnet_militar']; ?></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Cargo:</strong> <?php echo $usuario['cargo']; ?></p>
+                                        <p><strong>Departamento:</strong> <?php echo $usuario['departamento']; ?></p>
+                                        <p><strong>Usuario:</strong> <?php echo $usuario['usuario']; ?></p>
+                                        <p><strong>Contraseña:</strong> <?php echo $usuario['contrasena']; ?></p>
+                                        <p><strong>CI:</strong> <?php echo $usuario['CI']; ?></p>
+                                        <p><strong>Extensión:</strong> <?php echo $usuario['extension']; ?></p>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
+                                    Editar
+                                </button> </div>
                         </div>
                     </div>
                 </div>
@@ -236,6 +244,118 @@ mysqli_close($conexion);
         </div>
         
     </div>
+   
+     
+    <div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de edición en dos columnas -->
+                    <form action="guardar_edicion.php" method="POST">
+                        <input type="hidden" name="id_usuario" value="<?php echo $usuario['id']; ?>">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="nombres" class="form-label">Nombres</label>
+                                    <input type="text" class="form-control" id="nombres" name="nombres" value="<?php echo $usuario['nombres']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
+                                    <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="<?php echo $usuario['apellido_paterno']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellido_materno" class="form-label">Apellido Materno</label>
+                                    <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="<?php echo $usuario['apellido_materno']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                                    <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo $usuario['fecha_nacimiento']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="carnet_militar" class="form-label">Carnet Militar</label>
+                                    <input type="text" class="form-control" id="carnet_militar" name="carnet_militar" value="<?php echo $usuario['carnet_militar']; ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="cargo" class="form-label">Cargo</label>
+                                    <select class="form-select" id="cargo" name="cargo">
+        
+        <?php
+        // Consulta para obtener las extensiones
+        include("../../autenticacion/conexion.php");
+        $result =$conexion->query( "SELECT * FROM cargo");
+    
+            while ($row = mysqli_fetch_array($result)) {
+                ?>
+                <option value="<?=$row['id'] ?>"><?=$row['nombre']?></option>
+                <?php
+            }
+        
+        ?>
+    </select>  </div>
+                                <div class="mb-3">
+                                    <label for="departamento" class="form-label">Departamento</label>
+                                    <select class="form-select" id="departamento" name="departamento">
+        
+        <?php
+        // Consulta para obtener las extensiones
+        include("../../autenticacion/conexion.php");
+        $result =$conexion->query( "SELECT * FROM departamento");
+    
+            while ($row = mysqli_fetch_array($result)) {
+                ?>
+                <option value="<?=$row['id'] ?>"><?=$row['nombre']?></option>
+                <?php
+            }
+        
+        ?>
+    </select>  </div>
+                                <div class="mb-3">
+                                    <label for="usuario" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="usuario" name="usuario" value="<?php echo $usuario['usuario']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contrasena" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="contrasena" name="contrasena" value="<?php echo $usuario['contrasena']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="CI" class="form-label">CI</label>
+                                    <input type="text" class="form-control" id="CI" name="CI" value="<?php echo $usuario['CI']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="extension" class="form-label">Extensión</label>
+                                    <select class="form-select" id="extension" name="extension">
+        
+        <?php
+        // Consulta para obtener las extensiones
+        include("../../autenticacion/conexion.php");
+        $result =$conexion->query( "SELECT * FROM extension");
+    
+            while ($row = mysqli_fetch_array($result)) {
+                ?>
+                <option value="<?=$row['id'] ?>"><?=$row['abreviatura']?></option>
+                <?php
+            }
+        
+        ?>
+    </select> 
+</div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <a href="./perfil.php" class="btn btn-warning" role="button">Volver</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
