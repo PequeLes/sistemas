@@ -255,7 +255,7 @@ mysqli_close($conexion);
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de edición en dos columnas -->
-                    <form action="guardar_edicion.php" method="POST">
+                <form id="editForm" action="..\..\autenticacion\guardar_edicion.php" method="POST">
                         <input type="hidden" name="id_usuario" value="<?php echo $usuario['id']; ?>">
                         <div class="row">
                             <div class="col-md-6">
@@ -348,14 +348,20 @@ mysqli_close($conexion);
                             </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <button type="button" class="btn btn-success"  onclick="confirmarEnvio()" >Guardar Cambios</button>
                         <a href="./perfil.php" class="btn btn-warning" role="button">Volver</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-   
+    <script>
+        function confirmarEnvio() {
+            if (confirm("¿Está seguro de que desea guardar los cambios?")) {
+                document.getElementById('editForm').submit();
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>

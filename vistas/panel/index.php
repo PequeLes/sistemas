@@ -164,73 +164,117 @@
                 </a>
             </div>
         </aside>
-        <div class="main p-5">
-            <div id= "inicio" class="text-center content-div">
-                <h1>
-                    Informática
-                </h1>
-            
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Column 1</th>
-                        <th scope="col">Column 2</th>
-                        <th scope="col">Column 3</th>
-                        <th scope="col">Column 4</th>
-                        <th scope="col">Column 5</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Row 1, Cell 1</td>
-                        <td>Row 1, Cell 2</td>
-                        <td>Row 1, Cell 3</td>
-                        <td>Row 1, Cell 4</td>
-                        <td>Row 1, Cell 5</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Row 2, Cell 1</td>
-                        <td>Row 2, Cell 2</td>
-                        <td>Row 2, Cell 3</td>
-                        <td>Row 2, Cell 4</td>
-                        <td>Row 2, Cell 5</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Row 3, Cell 1</td>
-                        <td>Row 3, Cell 2</td>
-                        <td>Row 3, Cell 3</td>
-                        <td>Row 3, Cell 4</td>
-                        <td>Row 3, Cell 5</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Row 4, Cell 1</td>
-                        <td>Row 4, Cell 2</td>
-                        <td>Row 4, Cell 3</td>
-                        <td>Row 4, Cell 4</td>
-                        <td>Row 4, Cell 5</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>Row 5, Cell 1</td>
-                        <td>Row 5, Cell 2</td>
-                        <td>Row 5, Cell 3</td>
-                        <td>Row 5, Cell 4</td>
-                        <td>Row 5, Cell 5</td>
-                    </tr>
-                </tbody>
-           
-            
-            </table>
-        </div>
         
-        </div>
+                <div class="main p-5">
+                
+                    <div class="row justify-content-center">
+                       
+                            
+                                
+                                    <h5 class="card-title">Listado de Usuarios</h5>
+                                   
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Nombres</th>
+                                                    <th scope="col">Apellido Paterno</th>
+                                                    <th scope="col">Apellido Materno</th>
+                                                    <th scope="col">Fecha de Nacimiento</th>
+                                                    <th scope="col">Carnet Militar</th>
+                                                    <th scope="col">Cargo</th>
+                                                    <th scope="col">Departamento</th>
+                                                    <th scope="col">Usuario</th>
+                                                    <th scope="col">Contraseña</th>
+                                                    <th scope="col">CI</th>
+                                                    <th scope="col">Rol</th>
+                                                    <th scope="col">Acción</th> <!-- Nueva columna para acciones -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                            include('../../autenticacion/conexion.php');
+
+// Realiza la consulta para obtener todos los usuarios y sus atributos
+$query = "SELECT * FROM usuarios";
+$resultado = mysqli_query($conexion, $query);
+
+// Verifica si hay resultados
+if (mysqli_num_rows($resultado) > 0) {}
+
+$con=0;
+                                                while ($fila = mysqli_fetch_array($resultado)) {
+                                                    $con =$con+1;
+                                                    echo "<tr>";
+                                                    echo "<th scope='row'>" . $con . "</th>";
+                                                    echo "<td>" . $fila['nombres'] . "</td>";
+                                                    echo "<td>" . $fila['apellido_paterno'] . "</td>";
+                                                    echo "<td>" . $fila['apellido_materno'] . "</td>";
+                                                    echo "<td>" . $fila['fecha_nacimiento'] . "</td>";
+                                                    echo "<td>" . $fila['carnet_militar'] . "</td>";
+                                                    
+                                                    // Para mostrar el nombre del cargo, departamento y extensión
+                                                    $cargo_id = $fila['id_cargo'];
+                                                    $departamento_id = $fila['id_departamento'];
+                                                    $rol_id = $fila['rol_id'];
+                                                    
+                                                    // Obtener el nombre del cargo
+                                                    $cargo_query = "SELECT nombre FROM cargo WHERE id = '$cargo_id'";
+                                                    $cargo_resultado = mysqli_query($conexion, $cargo_query);
+                                                    if ($cargo_row = mysqli_fetch_assoc($cargo_resultado)) {
+                                                        $cargo_nombre = $cargo_row['nombre'];
+                                                    } else {
+                                                        $cargo_nombre = "Sin asignar";
+                                                    }
+                                                    
+                                                    // Obtener el nombre del departamento
+                                                    $departamento_query = "SELECT nombre FROM departamento WHERE id = '$departamento_id'";
+                                                    $departamento_resultado = mysqli_query($conexion, $departamento_query);
+                                                    if ($departamento_row = mysqli_fetch_assoc($departamento_resultado)) {
+                                                        $departamento_nombre = $departamento_row['nombre'];
+                                                    } else {
+                                                        $departamento_nombre = "Sin asignar";
+                                                    }
+                                                    
+                                                    // Obtener el nombre de la extensión
+                                                    $extension_query = "SELECT nombre FROM rol WHERE id = '$rol_id'";
+                                                    $extension_resultado = mysqli_query($conexion, $extension_query);
+                                                    if ($extension_row = mysqli_fetch_assoc($extension_resultado)) {
+                                                        $extension_nombre = $extension_row['nombre'];
+                                                    } else {
+                                                        $extension_nombre = "Sin asignar";
+                                                    }
+                                                    
+                                                    echo "<td>" . $cargo_nombre . "</td>";
+                                                    echo "<td>" . $departamento_nombre . "</td>";
+                                                    echo "<td>" . $fila['usuario'] . "</td>";
+                                                    echo "<td>" . $fila['contrasena'] . "</td>";
+                                                    echo "<td>" . $fila['CI'] . "</td>";
+                                                    echo "<td>" . $extension_nombre . "</td>";
+                                                    
+                                                    // Columna de acciones (editar y estado)
+                                                    echo "<td>";
+                                                    echo "<button type='button' class='btn btn-warning btn-sm' onclick='editarUsuario(" . $fila['id'] . ")'><i class='lni lni-pencil'></i> </button>";
+                                                    echo "<button type='button' class='btn btn-danger btn-sm' onclick='cambiarEstado(" . $fila['id'] . ")'><i class='lni lni-checkmark-circle'></i></button>";
+                                                    echo "</td>";
+                                                    
+                                                    echo "</tr>";
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                
+                            
+                        
+                    </div>
+                </div>
+            </div>
         
-    </div>
+        
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1y5M9AR8Ebbj6xL9B3TZB9jjc1a5F1D0/tAANdJcXU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
