@@ -45,7 +45,7 @@
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Registro</a>
+                            <a href="./registroauten/registro.php" class="sidebar-link">Registro</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="#" class="sidebar-link">Rol</a>
@@ -59,7 +59,7 @@
                     <a href="./departamento.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="lni lni-layout"></i>
-                        <span>Depeartamento</span>
+                        <span>Departamento</span>
                     </a>
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">

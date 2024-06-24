@@ -1,28 +1,16 @@
 <?php
-session_start(); // Iniciar la sesión para acceder a $_SESSION
-
-// Verificar si el usuario está autenticado (sesión iniciada)
-if (!isset($_SESSION['id_usuario'])) {
-    // Si no hay sesión iniciada, redirigir al inicio de sesión
-    header("Location: /sistemas/index.php");
-    exit();
-}
-
-// Incluir el archivo de conexión a la base de datos
-include('../../autenticacion/conexion.php');
+session_start();
+include('../../../autenticacion/conexion.php');
 
 // Obtener el ID del usuario desde la sesión
-$id_usuario = $_SESSION['id_usuario'];
+
 
 // Consulta SQL para obtener todos los datos del usuario
-$query = "SELECT u.id, u.nombres, u.apellido_paterno, u.apellido_materno, u.fecha_nacimiento, 
-                 u.carnet_militar, c.nombre as cargo, d.nombre as departamento, 
-                 u.usuario, u.contrasena, u.CI, e.abreviatura as extension
-          FROM usuarios u
-          LEFT JOIN cargo c ON u.id_cargo = c.id
-          LEFT JOIN departamento d ON u.id_departamento = d.id
-          LEFT JOIN extension e ON u.id_extension = e.id
-          WHERE u.id = $id_usuario";
+$query = "SELECT solicitud.id, solicitud.nombres, s.apellido_paterno, s.apellido_materno, s.fecha_nacimiento, 
+                 s.carnet_militar, s.usuario, s.contrasena, s.CI, s.abreviatura as extension
+          FROM solicitud s
+          LEFT JOIN extension e ON s.id_extension = e.id
+          WHERE s.id = $id";
 $result = mysqli_query($conexion, $query);
 
 // Verificar si se encontró el usuario
@@ -40,7 +28,6 @@ if ($result && mysqli_num_rows($result) > 0) {
 mysqli_free_result($result);
 mysqli_close($conexion);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -51,7 +38,7 @@ mysqli_close($conexion);
     <title>Panel</title>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
 </head>
 
@@ -63,24 +50,24 @@ mysqli_close($conexion);
                     <i class="lni lni-grid-alt"></i>
                 </button>
                 <div class="sidebar-logo">
-                    <a href="./index.php" class="nav-link" data-bs-target="#inicio">Inicio</a>
+                    <a href="../index.php" class="nav-link" data-bs-target="#inicio">Inicio</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="./perfil.php" class="sidebar-link nav-link" data-bs-target="#perfil">
+                    <a href="../perfil.php" class="sidebar-link nav-link" data-bs-target="#perfil">
                         <i class="lni lni-user"></i>
                         <span>Perfil</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="./pendientes.php" class="sidebar-link nav-link">
+                    <a href="../pendientes.php" class="sidebar-link nav-link">
                         <i class="lni lni-agenda"></i>
                         <span>Pendientes</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="./autenticacion.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                    <a href="../autenticacion.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-protection"></i>
                         <span>Autenticación</span>
                     </a>
@@ -97,9 +84,9 @@ mysqli_close($conexion);
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a href="./departamento.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+                    <a href="../departamento.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="lni lni-layout"></i>
-                        <span>Depeartamento</span>
+                        <span>Departamento</span>
                     </a>
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
@@ -184,7 +171,7 @@ mysqli_close($conexion);
 
                 </li>
                 <li class="sidebar-item">
-                    <a href="./notificaciones.php" class="sidebar-link">
+                    <a href="../notificaciones.php" class="sidebar-link">
                         <i class="lni lni-popup"></i>
                         <span>Notificaciones</span>
                     </a>
@@ -192,57 +179,105 @@ mysqli_close($conexion);
 
             </ul>
             <div class="sidebar-footer">
-                <a href="../../index.php" class="sidebar-link">
+                <a href="../../../index.php" class="sidebar-link">
                     <i class="lni lni-exit"></i>
                     <span>Salida</span>
                 </a>
             </div>
         </aside>
         <div class="main p-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-body" style="border-radius:70%">
-                                <h5 class="card-title">Perfil de Usuario</h5>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p><strong>Nombres:</strong> <?php echo $usuario['nombres']; ?></p>
-                                        <p><strong>Apellido Paterno:</strong> <?php echo $usuario['apellido_paterno']; ?></p>
-                                        <p><strong>Apellido Materno:</strong> <?php echo $usuario['apellido_materno']; ?></p>
-                                        <p><strong>Fecha de Nacimiento:</strong> <?php echo $usuario['fecha_nacimiento']; ?></p>
-                                        <p><strong>Carnet Militar:</strong> <?php echo $usuario['carnet_militar']; ?></p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><strong>Cargo:</strong> <?php echo $usuario['cargo']; ?></p>
-                                        <p><strong>Departamento:</strong> <?php echo $usuario['departamento']; ?></p>
-                                        <p><strong>Usuario:</strong> <?php echo $usuario['usuario']; ?></p>
-                                        <p><strong>Contraseña:</strong> <?php echo $usuario['contrasena']; ?></p>
-                                        <p><strong>CI:</strong> <?php echo $usuario['CI']; ?></p>
-                                        <p><strong>Extensión:</strong> <?php echo $usuario['extension']; ?></p>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
-                                    Editar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+            <div id="inicio" class="text-center content-div">
+                <h1>
+                    Lista de usuarios de solicitudes enviadas
+                </h1>
+                <div class="taks">
+                    <form class="search-form" method="GET" action="">
+                        <input type="text" name="buscar" placeholder="Buscar por nombre..." value="<?php echo isset($_GET['buscar']) ? htmlspecialchars($_GET['buscar']) : ''; ?>">
+                        <button class="buttonuno" type="submit">Buscar</button>
+                    </form>
                 </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <h3>Datos del Solicitante</h3>
+                            <th style="text-align: center;">ID</th>
+                            <th style="text-align: center;">Nombres </th>
+                            <th style="text-align: center;">Apellido Paterno</th>
+                            <th style="text-align: center;">Apellido Materno</th>
+                            <th style="text-align: center;">Carnet de Identidad</th>
+                            <th style="text-align: center;">Carnet Militar</th>
+                            <th style="text-align: center;">Aceptar</th>
+                            <th style="text-align: center;">Denegar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $conexion = mysqli_connect("localhost", "root", "", "db_fuerza");
+                        if (!$conexion) {
+                            die("Error al conectar con la base de datos: " . mysqli_connect_error());
+                        }
+
+                        // Consulta SQL inicial para obtener todos los registros
+                        $sql = "SELECT id, nombres, apellido_paterno, apellido_materno, CI, carnet_militar FROM solicitud";
+
+                        // Verificamos si se envió el formulario de búsqueda
+                        if (isset($_GET['buscar']) && !empty($_GET['buscar'])) {
+                            $busqueda = $_GET['buscar'];
+
+                            // Consulta SQL modificada para buscar por nombre del trabajador
+                            $sql_busqueda = "SELECT id, nombres, apellido_paterno, apellido_materno, CI, carnet_militar
+                                             FROM solicitud 
+                                             WHERE nombres LIKE '%$busqueda%'";
+                            $sql = $sql_busqueda;
+                        }
+                        $resultado = $conexion->query($sql);
+                        $resultados = [];
+
+                        // Almacenamos los resultados de la búsqueda en el array $resultados
+                        if ($resultado->num_rows > 0) {
+                            while ($row = $resultado->fetch_assoc()) {
+                                $resultados[] = $row;
+                            }
+                        } else {
+                            echo "<tr><td colspan='8' style='text-align: center;' class='no-results-container'><div class='no-results'>No se encontraron resultados</div></td></tr>";
+                        }
+                        foreach ($resultados as $row) {
+                            echo "<tr>";
+                            echo "<td data-label='ID'>" . $row["id"] . "</td>";
+                            echo "<td data-label='Nombres'>" . $row["nombres"] . "</td>";
+                            echo "<td data-label='Apellido Paterno'>" . $row["apellido_paterno"] . "</td>";
+                            echo "<td data-label='Apellido Materno'>" . $row["apellido_materno"] . "</td>";
+                            echo "<td data-label='Carnet de Identidad'>" . $row["CI"] . "</td>";
+                            echo "<td data-label='Carnet Militar'>" . $row["carnet_militar"] . "</td>";
+                        ?>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aceptarUsuarioModal<?php echo $solicitud['id']; ?>">
+                                Aceptar
+                            </button>
+                            <td>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#aceptarUsuarioModal">
+                                    Denegar
+                                </button>
+                            </td>
+
+                        <?php
+                            echo "</tr>";
+                        }
+
+                        ?>
+                    </tbody>
+
+
+                </table>
             </div>
+
         </div>
 
     </div>
-
-    </div>
-
-
-    <div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
+    <div class="modal fade" id="aceptarUsuarioModal" tabindex="-1" aria-labelledby="aceptarUsuarioModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario</h5>
+                    <h5 class="modal-title" id="aceptarUsuarioModalLabel">Editar Usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -352,5 +387,5 @@ mysqli_close($conexion);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
