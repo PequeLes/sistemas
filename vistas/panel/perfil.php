@@ -29,7 +29,7 @@ $result = mysqli_query($conexion, $query);
 if ($result && mysqli_num_rows($result) > 0) {
     $usuario = mysqli_fetch_assoc($result);
     // Aquí puedes acceder a todos los datos del usuario
- 
+
     // Puedes acceder a más campos según tu estructura de base de datos
 } else {
     // Manejo de error si no se encontró el usuario
@@ -50,10 +50,9 @@ mysqli_close($conexion);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel</title>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    
+
 </head>
 
 <body>
@@ -81,8 +80,7 @@ mysqli_close($conexion);
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="./autenticacion.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                    <a href="./autenticacion.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-protection"></i>
                         <span>Autenticación</span>
                     </a>
@@ -99,15 +97,13 @@ mysqli_close($conexion);
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a href="./departamento.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+                    <a href="./departamento.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="lni lni-layout"></i>
                         <span>Depeartamento</span>
                     </a>
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                               data-bs-target="#multi-one" aria-expanded="false" aria-controls="multi-one">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-one" aria-expanded="false" aria-controls="multi-one">
                                 Dpto. l Personal
                             </a>
                             <ul id="multi-one" class="sidebar-dropdown list-unstyled collapse">
@@ -120,8 +116,7 @@ mysqli_close($conexion);
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                               data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
                                 Dpto ll Inteligencia
                             </a>
                             <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
@@ -134,8 +129,7 @@ mysqli_close($conexion);
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                               data-bs-target="#multi-three" aria-expanded="false" aria-controls="multi-three">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-three" aria-expanded="false" aria-controls="multi-three">
                                 Dpto lll Operaciones
                             </a>
                             <ul id="multi-three" class="sidebar-dropdown list-unstyled collapse">
@@ -148,8 +142,7 @@ mysqli_close($conexion);
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                               data-bs-target="#multi-four" aria-expanded="false" aria-controls="multi-four">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-four" aria-expanded="false" aria-controls="multi-four">
                                 Dpto lV Logistica
                             </a>
                             <ul id="multi-four" class="sidebar-dropdown list-unstyled collapse">
@@ -162,8 +155,7 @@ mysqli_close($conexion);
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                               data-bs-target="#multi-five" aria-expanded="false" aria-controls="multi-five">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-five" aria-expanded="false" aria-controls="multi-five">
                                 Dpto V Educaciones
                             </a>
                             <ul id="multi-five" class="sidebar-dropdown list-unstyled collapse">
@@ -176,8 +168,7 @@ mysqli_close($conexion);
                             </ul>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                               data-bs-target="#multi-six" aria-expanded="false" aria-controls="multi-six">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-six" aria-expanded="false" aria-controls="multi-six">
                                 Dpto VI Ciencia y Tecnologia
                             </a>
                             <ul id="multi-six" class="sidebar-dropdown list-unstyled collapse">
@@ -190,7 +181,7 @@ mysqli_close($conexion);
                             </ul>
                         </li>
                     </ul>
-                    
+
                 </li>
                 <li class="sidebar-item">
                     <a href="./notificaciones.php" class="sidebar-link">
@@ -198,7 +189,7 @@ mysqli_close($conexion);
                         <span>Notificaciones</span>
                     </a>
                 </li>
-               
+
             </ul>
             <div class="sidebar-footer">
                 <a href="../../index.php" class="sidebar-link">
@@ -234,18 +225,19 @@ mysqli_close($conexion);
                                 </div>
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal">
                                     Editar
-                                </button> </div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        </div>
-        
+
     </div>
-   
-     
+
+    </div>
+
+
     <div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -284,37 +276,39 @@ mysqli_close($conexion);
                                 <div class="mb-3">
                                     <label for="cargo" class="form-label">Cargo</label>
                                     <select class="form-select" id="cargo" name="cargo">
-        
-        <?php
-        // Consulta para obtener las extensiones
-        include("../../autenticacion/conexion.php");
-        $result =$conexion->query( "SELECT * FROM cargo");
-    
-            while ($row = mysqli_fetch_array($result)) {
-                ?>
-                <option value="<?=$row['id'] ?>"><?=$row['nombre']?></option>
-                <?php
-            }
-        
-        ?>
-    </select>  </div>
+
+                                        <?php
+                                        // Consulta para obtener las extensiones
+                                        include("../../autenticacion/conexion.php");
+                                        $result = $conexion->query("SELECT * FROM cargo");
+
+                                        while ($row = mysqli_fetch_array($result)) {
+                                        ?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
                                 <div class="mb-3">
                                     <label for="departamento" class="form-label">Departamento</label>
                                     <select class="form-select" id="departamento" name="departamento">
-        
-        <?php
-        // Consulta para obtener las extensiones
-        include("../../autenticacion/conexion.php");
-        $result =$conexion->query( "SELECT * FROM departamento");
-    
-            while ($row = mysqli_fetch_array($result)) {
-                ?>
-                <option value="<?=$row['id'] ?>"><?=$row['nombre']?></option>
-                <?php
-            }
-        
-        ?>
-    </select>  </div>
+
+                                        <?php
+                                        // Consulta para obtener las extensiones
+                                        include("../../autenticacion/conexion.php");
+                                        $result = $conexion->query("SELECT * FROM departamento");
+
+                                        while ($row = mysqli_fetch_array($result)) {
+                                        ?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
                                 <div class="mb-3">
                                     <label for="usuario" class="form-label">Usuario</label>
                                     <input type="text" class="form-control" id="usuario" name="usuario" value="<?php echo $usuario['usuario']; ?>">
@@ -330,38 +324,32 @@ mysqli_close($conexion);
                                 <div class="mb-3">
                                     <label for="extension" class="form-label">Extensión</label>
                                     <select class="form-select" id="extension" name="extension">
-        
-        <?php
-        // Consulta para obtener las extensiones
-        include("../../autenticacion/conexion.php");
-        $result =$conexion->query( "SELECT * FROM extension");
-    
-            while ($row = mysqli_fetch_array($result)) {
-                ?>
-                <option value="<?=$row['id'] ?>"><?=$row['abreviatura']?></option>
-                <?php
-            }
-        
-        ?>
-    </select> 
-</div>
+
+                                        <?php
+                                        // Consulta para obtener las extensiones
+                                        include("../../autenticacion/conexion.php");
+                                        $result = $conexion->query("SELECT * FROM extension");
+
+                                        while ($row = mysqli_fetch_array($result)) {
+                                        ?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['abreviatura'] ?></option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         
-                        <button type="button" class="btn btn-success"  onclick="confirmarEnvio()" >Guardar Cambios</button>
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
                         <a href="./perfil.php" class="btn btn-warning" role="button">Volver</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        function confirmarEnvio() {
-            if (confirm("¿Está seguro de que desea guardar los cambios?")) {
-                document.getElementById('editForm').submit();
-            }
-        }
-    </script>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
