@@ -1,33 +1,3 @@
-<?php
-session_start();
-include('../../../autenticacion/conexion.php');
-
-// Obtener el ID del usuario desde la sesión
-
-
-// Consulta SQL para obtener todos los datos del usuario
-$query = "SELECT solicitud.id, solicitud.nombres, s.apellido_paterno, s.apellido_materno, s.fecha_nacimiento, 
-                 s.carnet_militar, s.usuario, s.contrasena, s.CI, s.abreviatura as extension
-          FROM solicitud s
-          LEFT JOIN extension e ON s.id_extension = e.id
-          WHERE s.id = $id";
-$result = mysqli_query($conexion, $query);
-
-// Verificar si se encontró el usuario
-if ($result && mysqli_num_rows($result) > 0) {
-    $usuario = mysqli_fetch_assoc($result);
-    // Aquí puedes acceder a todos los datos del usuario
-
-    // Puedes acceder a más campos según tu estructura de base de datos
-} else {
-    // Manejo de error si no se encontró el usuario
-    echo "Error: No se encontró el usuario.";
-}
-
-// Liberar el resultado y cerrar la conexión
-mysqli_free_result($result);
-mysqli_close($conexion);
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -206,12 +176,12 @@ mysqli_close($conexion);
                             <th style="text-align: center;">Apellido Materno</th>
                             <th style="text-align: center;">Carnet de Identidad</th>
                             <th style="text-align: center;">Carnet Militar</th>
-                            <th style="text-align: center;">Aceptar</th>
-                            <th style="text-align: center;">Denegar</th>
+                            <th style="text-align: center;">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
+                        // Conexión a la base de datos
                         $conexion = mysqli_connect("localhost", "root", "", "db_fuerza");
                         if (!$conexion) {
                             die("Error al conectar con la base de datos: " . mysqli_connect_error());
@@ -227,163 +197,102 @@ mysqli_close($conexion);
                             // Consulta SQL modificada para buscar por nombre del trabajador
                             $sql_busqueda = "SELECT id, nombres, apellido_paterno, apellido_materno, CI, carnet_militar
                                              FROM solicitud 
-                                             WHERE nombres LIKE '%$busqueda%'";
+                                             WHERE nombres LIKE '%$busqueda%' OR CI LIKE '%$busqueda%' OR carnet_militar LIKE '%$busqueda%'";
                             $sql = $sql_busqueda;
                         }
-                        $resultado = $conexion->query($sql);
-                        $resultados = [];
 
-                        // Almacenamos los resultados de la búsqueda en el array $resultados
+                        // Ejecutar consulta
+                        $resultado = $conexion->query($sql);
+
+                        // Mostrar resultados en la tabla
                         if ($resultado->num_rows > 0) {
                             while ($row = $resultado->fetch_assoc()) {
-                                $resultados[] = $row;
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row["id"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($row["nombres"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($row["apellido_paterno"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($row["apellido_materno"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($row["CI"]) . "</td>";
+                                echo "<td>" . htmlspecialchars($row["carnet_militar"]) . "</td>";
+                                echo "<td>";
+                                echo "<form method='get' action='registro.php'>";
+                                echo "<input type='hidden' name='id' value='" . htmlspecialchars($row["id"]) . "' />";
+                                echo "<button type='button' class='btn btn-primary edit-btn' data-bs-toggle='modal' data-bs-target='#modalDetalleUsuario'>Aceptar</button>";
+
+                                echo "</form>";
+                                echo "</td>";
+                                echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='8' style='text-align: center;' class='no-results-container'><div class='no-results'>No se encontraron resultados</div></td></tr>";
-                        }
-                        foreach ($resultados as $row) {
-                            echo "<tr>";
-                            echo "<td data-label='ID'>" . $row["id"] . "</td>";
-                            echo "<td data-label='Nombres'>" . $row["nombres"] . "</td>";
-                            echo "<td data-label='Apellido Paterno'>" . $row["apellido_paterno"] . "</td>";
-                            echo "<td data-label='Apellido Materno'>" . $row["apellido_materno"] . "</td>";
-                            echo "<td data-label='Carnet de Identidad'>" . $row["CI"] . "</td>";
-                            echo "<td data-label='Carnet Militar'>" . $row["carnet_militar"] . "</td>";
-                        ?>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aceptarUsuarioModal<?php echo $solicitud['id']; ?>">
-                                Aceptar
-                            </button>
-                            <td>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#aceptarUsuarioModal">
-                                    Denegar
-                                </button>
-                            </td>
-
-                        <?php
-                            echo "</tr>";
+                            echo "<tr><td colspan='7' style='text-align: center;'>No se encontraron resultados</td></tr>";
                         }
 
+                        // Cerrar conexión a la base de datos
+                        $conexion->close();
                         ?>
                     </tbody>
-
-
                 </table>
             </div>
-
         </div>
-
     </div>
-    <div class="modal fade" id="aceptarUsuarioModal" tabindex="-1" aria-labelledby="aceptarUsuarioModalLabel" aria-hidden="true">
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDetalleUsuario" tabindex="-1" aria-labelledby="modalDetalleUsuarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="aceptarUsuarioModalLabel">Editar Usuario</h5>
+                    <h5 class="modal-title" id="modalDetalleUsuarioLabel">Detalle del Usuario</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Formulario de edición en dos columnas -->
-                    <form action="guardar_edicion.php" method="POST">
-                        <input type="hidden" name="id_usuario" value="<?php echo $usuario['id']; ?>">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="nombres" class="form-label">Nombres</label>
-                                    <input type="text" class="form-control" id="nombres" name="nombres" value="<?php echo $usuario['nombres']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
-                                    <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="<?php echo $usuario['apellido_paterno']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="apellido_materno" class="form-label">Apellido Materno</label>
-                                    <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="<?php echo $usuario['apellido_materno']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
-                                    <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo $usuario['fecha_nacimiento']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="carnet_militar" class="form-label">Carnet Militar</label>
-                                    <input type="text" class="form-control" id="carnet_militar" name="carnet_militar" value="<?php echo $usuario['carnet_militar']; ?>">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="cargo" class="form-label">Cargo</label>
-                                    <select class="form-select" id="cargo" name="cargo">
+                    <?php
+                    // Conexión a la base de datos
+                    $conexion = mysqli_connect("localhost", "root", "", "db_fuerza");
+                    if (!$conexion) {
+                        die("Error al conectar con la base de datos: " . mysqli_connect_error());
+                    }
 
-                                        <?php
-                                        // Consulta para obtener las extensiones
-                                        include("../../autenticacion/conexion.php");
-                                        $result = $conexion->query("SELECT * FROM cargo");
+                    // Verificar si se ha enviado un ID de usuario para cargar los detalles
+                    if (isset($_GET['id']) && !empty($_GET['id'])) {
+                        $id = $_GET['id'];
 
-                                        while ($row = mysqli_fetch_array($result)) {
-                                        ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
-                                        <?php
-                                        }
+                        // Consulta SQL para obtener los detalles del usuario según el ID
+                        $sql = "SELECT * FROM solicitud WHERE id = $id";
 
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="departamento" class="form-label">Departamento</label>
-                                    <select class="form-select" id="departamento" name="departamento">
+                        $resultado = $conexion->query($sql);
 
-                                        <?php
-                                        // Consulta para obtener las extensiones
-                                        include("../../autenticacion/conexion.php");
-                                        $result = $conexion->query("SELECT * FROM departamento");
+                        // Verificar si se encontraron resultados
+                        if ($resultado->num_rows > 0) {
+                            $row = $resultado->fetch_assoc();
 
-                                        while ($row = mysqli_fetch_array($result)) {
-                                        ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
-                                        <?php
-                                        }
+                            // Mostrar los detalles del usuario en el modal
+                            echo "<div class='user-details'>";
+                            echo "<p><strong>Nombres: </strong>" . htmlspecialchars($row['nombres']) . "</p>";
+                            echo "<p><strong>Apellidos: </strong>" . htmlspecialchars($row['apellido_paterno']) . " " . htmlspecialchars($row['apellido_materno']) . "</p>";
+                            echo "<p><strong>Carnet de Identidad: </strong>" . htmlspecialchars($row['CI']) . "</p>";
+                            echo "<p><strong>Carnet Militar: </strong>" . htmlspecialchars($row['carnet_militar']) . "</p>";
+                            echo "<p><strong>Fecha de Nacimiento: </strong>" . htmlspecialchars($row['fecha_nacimiento']) . "</p>";
+                            // Agrega más detalles según sea necesario
+                            echo "</div>";
 
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="usuario" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="usuario" name="usuario" value="<?php echo $usuario['usuario']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="contrasena" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="contrasena" name="contrasena" value="<?php echo $usuario['contrasena']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="CI" class="form-label">CI</label>
-                                    <input type="text" class="form-control" id="CI" name="CI" value="<?php echo $usuario['CI']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="extension" class="form-label">Extensión</label>
-                                    <select class="form-select" id="extension" name="extension">
 
-                                        <?php
-                                        // Consulta para obtener las extensiones
-                                        include("../../autenticacion/conexion.php");
-                                        $result = $conexion->query("SELECT * FROM extension");
+                            // Puedes agregar más campos según tus necesidades
+                        } else {
+                            echo "No se encontraron detalles para el usuario seleccionado.";
+                        }
+                    } else {
+                        echo "No se ha especificado ningún usuario para mostrar.";
+                    }
 
-                                        while ($row = mysqli_fetch_array($result)) {
-                                        ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['abreviatura'] ?></option>
-                                        <?php
-                                        }
-
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                        <a href="./perfil.php" class="btn btn-warning" role="button">Volver</a>
-                    </form>
+                    // Cerrar la conexión a la base de datos
+                    $conexion->close();
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
