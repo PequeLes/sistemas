@@ -3,12 +3,12 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
-function Showhiden(){
-  var clas= document.getElementsByClassName('nav-tap');
-  if (clas.style.visibility ==hidden) {
-    clas.style.visibility= "visible";
+function Showhiden() {
+  var clas = document.getElementsByClassName('nav-tap');
+  if (clas.style.visibility == hidden) {
+    clas.style.visibility = "visible";
   } else {
-    clas.style.visibility= "hidden";
+    clas.style.visibility = "hidden";
   }
 }
 
