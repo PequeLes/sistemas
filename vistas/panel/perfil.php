@@ -57,147 +57,9 @@ mysqli_close($conexion);
 
 <body>
     <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                    <i class="lni lni-grid-alt"></i>
-                </button>
-                <div class="sidebar-logo">
-                    <a href="./index.php" class="nav-link" data-bs-target="#inicio">Inicio</a>
-                </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a href="./perfil.php" class="sidebar-link nav-link" data-bs-target="#perfil">
-                        <i class="lni lni-user"></i>
-                        <span>Perfil</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="./pendientes.php" class="sidebar-link nav-link">
-                        <i class="lni lni-agenda"></i>
-                        <span>Pendientes</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="./autenticacion.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-protection"></i>
-                        <span>Autenticación</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Registro</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Rol</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Permiso</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a href="./departamento.php" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                        <i class="lni lni-layout"></i>
-                        <span>Depeartamento</span>
-                    </a>
-                    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-one" aria-expanded="false" aria-controls="multi-one">
-                                Dpto. l Personal
-                            </a>
-                            <ul id="multi-one" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                                Dpto ll Inteligencia
-                            </a>
-                            <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-three" aria-expanded="false" aria-controls="multi-three">
-                                Dpto lll Operaciones
-                            </a>
-                            <ul id="multi-three" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-four" aria-expanded="false" aria-controls="multi-four">
-                                Dpto lV Logistica
-                            </a>
-                            <ul id="multi-four" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-five" aria-expanded="false" aria-controls="multi-five">
-                                Dpto V Educaciones
-                            </a>
-                            <ul id="multi-five" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-six" aria-expanded="false" aria-controls="multi-six">
-                                Dpto VI Ciencia y Tecnologia
-                            </a>
-                            <ul id="multi-six" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                </li>
-                <li class="sidebar-item">
-                    <a href="./notificaciones.php" class="sidebar-link">
-                        <i class="lni lni-popup"></i>
-                        <span>Notificaciones</span>
-                    </a>
-                </li>
-
-            </ul>
-            <div class="sidebar-footer">
-                <a href="../../index.php" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Salida</span>
-                </a>
-            </div>
-        </aside>
+    <?php
+    include('./navbar.php');  
+    ?>
         <div class="main p-5">
             <div class="container">
                 <div class="row justify-content-center">
@@ -276,38 +138,42 @@ mysqli_close($conexion);
                                 <div class="mb-3">
                                     <label for="cargo" class="form-label">Cargo</label>
                                     <select class="form-select" id="cargo" name="cargo">
+    <?php
+    // Valor guardado que deseas mantener seleccionado
+    $valor_guardado = $fila['id_cargo'];
 
-                                        <?php
-                                        // Consulta para obtener las extensiones
-                                        include("../../autenticacion/conexion.php");
-                                        $result = $conexion->query("SELECT * FROM cargo");
+    // Consulta para obtener los cargos de la base de datos
+    include("../../autenticacion/conexion.php");
+    $query_cargos = "SELECT * FROM cargo";
+    $result_cargos = mysqli_query($conexion, $query_cargos);
 
-                                        while ($row = mysqli_fetch_array($result)) {
-                                        ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
-                                        <?php
-                                        }
+    while ($cargo = mysqli_fetch_assoc($result_cargos)) {
+        $selected = ($cargo['id'] == $valor_guardado) ? 'selected' : '';
+        echo '<option value="' . $cargo['id'] . '" ' . $selected . '>' . $cargo['nombre'] . '</option>';
+    }
+    ?>
+</select>
 
-                                        ?>
-                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="departamento" class="form-label">Departamento</label>
                                     <select class="form-select" id="departamento" name="departamento">
+    <?php
+    // Valor guardado que deseas mantener seleccionado
+    $valor_guardado = $fila['id_departamento'];
 
-                                        <?php
-                                        // Consulta para obtener las extensiones
-                                        include("../../autenticacion/conexion.php");
-                                        $result = $conexion->query("SELECT * FROM departamento");
+    // Consulta para obtener los departamentos de la base de datos
+    include("../../autenticacion/conexion.php");
+    $query_departamentos = "SELECT * FROM departamento";
+    $result_departamentos = mysqli_query($conexion, $query_departamentos);
 
-                                        while ($row = mysqli_fetch_array($result)) {
-                                        ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['nombre'] ?></option>
-                                        <?php
-                                        }
+    while ($departamento = mysqli_fetch_assoc($result_departamentos)) {
+        $selected = ($departamento['id'] == $valor_guardado) ? 'selected' : '';
+        echo '<option value="' . $departamento['id'] . '" ' . $selected . '>' . $departamento['nombre'] . '</option>';
+    }
+    ?>
+</select>
 
-                                        ?>
-                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="usuario" class="form-label">Usuario</label>
@@ -324,20 +190,22 @@ mysqli_close($conexion);
                                 <div class="mb-3">
                                     <label for="extension" class="form-label">Extensión</label>
                                     <select class="form-select" id="extension" name="extension">
+    <?php
+    // Valor guardado que deseas mantener seleccionado
+    $valor_guardado = $fila['id_extension'];
 
-                                        <?php
-                                        // Consulta para obtener las extensiones
-                                        include("../../autenticacion/conexion.php");
-                                        $result = $conexion->query("SELECT * FROM extension");
+    // Consulta para obtener las extensiones de la base de datos
+    include("../../autenticacion/conexion.php");
+    $query_extensiones = "SELECT * FROM extension";
+    $result_extensiones = mysqli_query($conexion, $query_extensiones);
 
-                                        while ($row = mysqli_fetch_array($result)) {
-                                        ?>
-                                            <option value="<?= $row['id'] ?>"><?= $row['abreviatura'] ?></option>
-                                        <?php
-                                        }
+    while ($extension = mysqli_fetch_assoc($result_extensiones)) {
+        $selected = ($extension['id'] == $valor_guardado) ? 'selected' : '';
+        echo '<option value="' . $extension['id'] . '" ' . $selected . '>' . $extension['abreviatura'] . '</option>';
+    }
+    ?>
+</select>
 
-                                        ?>
-                                    </select>
                                 </div>
                             </div>
                         </div>
