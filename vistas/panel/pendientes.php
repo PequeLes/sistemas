@@ -478,8 +478,7 @@ while ($extension = mysqli_fetch_assoc($result_extensiones)) {
             </div>
 
         </div>
-
->>>>>>> f82e5ae3989d88c2aae4f2c5919c3158910e4459
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
