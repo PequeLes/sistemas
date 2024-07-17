@@ -140,3 +140,17 @@ a.sidebar-link:hover {
     transform: rotate(45deg);
     transition: all .2s ease-out;
 }
+<<<<<<< HEAD
+=======
+
+.taks{
+    background: white;
+    padding: 20px;
+    transition: box-shadow 0.5s cubic-bezier(0.38, 0.33, 0.25, 1);
+}
+.buttonuno{
+    color: #ffffff;
+    background: #007bff;
+    border-color: white;
+}
+>>>>>>> f82e5ae3989d88c2aae4f2c5919c3158910e4459
