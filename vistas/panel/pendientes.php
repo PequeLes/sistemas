@@ -15,10 +15,14 @@
 <body>
     <div class="wrapper">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f50e0c4e8bd34e6d59cc47aef7ed1fd575bc3ad2
     <?php
     include('./navbar.php');  
     ?>
         <div class="main p-5">
+<<<<<<< HEAD
                 
                 <div class="row justify-content-center">
                    
@@ -415,70 +419,76 @@ while ($extension = mysqli_fetch_assoc($result_extensiones)) {
         </aside>
         <div class="main p-5">
             <div id="inicio" class="text-center content-div">
+=======
+            <div id= "inicio" class="text-center content-div">
+>>>>>>> f50e0c4e8bd34e6d59cc47aef7ed1fd575bc3ad2
                 <h1>
                     Informática
                 </h1>
-
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Column 1</th>
-                            <th scope="col">Column 2</th>
-                            <th scope="col">Column 3</th>
-                            <th scope="col">Column 4</th>
-                            <th scope="col">Column 5</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Row 1, Cell 1</td>
-                            <td>Row 1, Cell 2</td>
-                            <td>Row 1, Cell 3</td>
-                            <td>Row 1, Cell 4</td>
-                            <td>Row 1, Cell 5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Row 2, Cell 1</td>
-                            <td>Row 2, Cell 2</td>
-                            <td>Row 2, Cell 3</td>
-                            <td>Row 2, Cell 4</td>
-                            <td>Row 2, Cell 5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Row 3, Cell 1</td>
-                            <td>Row 3, Cell 2</td>
-                            <td>Row 3, Cell 3</td>
-                            <td>Row 3, Cell 4</td>
-                            <td>Row 3, Cell 5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Row 4, Cell 1</td>
-                            <td>Row 4, Cell 2</td>
-                            <td>Row 4, Cell 3</td>
-                            <td>Row 4, Cell 4</td>
-                            <td>Row 4, Cell 5</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Row 5, Cell 1</td>
-                            <td>Row 5, Cell 2</td>
-                            <td>Row 5, Cell 3</td>
-                            <td>Row 5, Cell 4</td>
-                            <td>Row 5, Cell 5</td>
-                        </tr>
-                    </tbody>
-
-
-                </table>
-            </div>
-
+            
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Column 1</th>
+                        <th scope="col">Column 2</th>
+                        <th scope="col">Column 3</th>
+                        <th scope="col">Column 4</th>
+                        <th scope="col">Column 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Row 1, Cell 1</td>
+                        <td>Row 1, Cell 2</td>
+                        <td>Row 1, Cell 3</td>
+                        <td>Row 1, Cell 4</td>
+                        <td>Row 1, Cell 5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Row 2, Cell 1</td>
+                        <td>Row 2, Cell 2</td>
+                        <td>Row 2, Cell 3</td>
+                        <td>Row 2, Cell 4</td>
+                        <td>Row 2, Cell 5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Row 3, Cell 1</td>
+                        <td>Row 3, Cell 2</td>
+                        <td>Row 3, Cell 3</td>
+                        <td>Row 3, Cell 4</td>
+                        <td>Row 3, Cell 5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Row 4, Cell 1</td>
+                        <td>Row 4, Cell 2</td>
+                        <td>Row 4, Cell 3</td>
+                        <td>Row 4, Cell 4</td>
+                        <td>Row 4, Cell 5</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Row 5, Cell 1</td>
+                        <td>Row 5, Cell 2</td>
+                        <td>Row 5, Cell 3</td>
+                        <td>Row 5, Cell 4</td>
+                        <td>Row 5, Cell 5</td>
+                    </tr>
+                </tbody>
+           
+            
+            </table>
         </div>
         
+<<<<<<< HEAD
+=======
+        </div>
+        
+>>>>>>> f50e0c4e8bd34e6d59cc47aef7ed1fd575bc3ad2
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 

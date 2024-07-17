@@ -58,6 +58,7 @@ mysqli_close($conexion);
 <body>
     <div class="wrapper">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <?php
     include('./navbar.php');  
     ?>
@@ -204,6 +205,11 @@ mysqli_close($conexion);
             </div>
         </aside>
 >>>>>>> f82e5ae3989d88c2aae4f2c5919c3158910e4459
+=======
+    <?php
+    include('./navbar.php');  
+    ?>
+>>>>>>> f50e0c4e8bd34e6d59cc47aef7ed1fd575bc3ad2
         <div class="main p-5">
             <div class="container">
                 <div class="row justify-content-center">

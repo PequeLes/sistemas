@@ -12,18 +12,9 @@ function Showhiden() {
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 function confirmarEnvio() {
   if (confirm("¿Está seguro de que desea guardar los cambios?")) {
       document.getElementById('editForm').submit();
   }
 }
-=======
-
-
->>>>>>> f82e5ae3989d88c2aae4f2c5919c3158910e4459
-=======
-
-
->>>>>>> f82e5ae3989d88c2aae4f2c5919c3158910e4459

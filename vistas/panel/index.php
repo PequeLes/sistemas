@@ -16,6 +16,9 @@
 <body>
     <div class="wrapper">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f50e0c4e8bd34e6d59cc47aef7ed1fd575bc3ad2
     <?php
     include('./navbar.php');  
     ?>
@@ -397,29 +400,13 @@ $con=0;
                 </div>
             </form>
         </div>
+        
     </div>
-</div>
-
-
-
-
-
-
-
-
-<!-- JavaScript opcional para inicializar el modal -->
-
-
-<script>
-    var myModal = new bootstrap.Modal(document.getElementById('modalNuevo'), {
-        keyboard: false
-    });
-</script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGz1y5M9AR8Ebbj6xL9B3TZB9jjc1a5F1D0/tAANdJcXU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
        
+<<<<<<< HEAD
 =======
         <aside id="sidebar">
             <div class="d-flex">
@@ -633,6 +620,8 @@ $con=0;
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
        
+=======
+>>>>>>> f50e0c4e8bd34e6d59cc47aef7ed1fd575bc3ad2
     <script src="script.js"></script>
     <script>
         function cambiarEstado(id) {
