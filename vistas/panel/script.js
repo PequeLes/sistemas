@@ -12,5 +12,8 @@ function Showhiden() {
   }
 }
 
-
-
+function confirmarEnvio() {
+  if (confirm("¿Está seguro de que desea guardar los cambios?")) {
+      document.getElementById('editForm').submit();
+  }
+}
